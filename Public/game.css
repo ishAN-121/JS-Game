@@ -1,0 +1,89 @@
+html {
+    scroll-behavior: smooth;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: "Tilt+Prism";
+    font-size: 1.5rem;
+    background-image: url("https://w0.peakpx.com/wallpaper/241/159/HD-wallpaper-black-stars-black-aesthetic.jpg");
+    overflow: hidden;
+
+}
+
+#Game {
+    justify-content: center;
+    padding: 0.5rem;
+    display: flex;
+    font-family: "Tilt Prism";
+    font-size: 7vh;
+    text-decoration: underline;
+    animation-name: color;
+    animation-duration: 6s;
+    animation-iteration-count: infinite;
+    letter-spacing: 0.2rem;
+}
+
+@keyframes color {
+    0% {
+        color: grey;
+    }
+
+    50% {
+        color: white;
+    }
+
+    100% {
+        color: grey;
+    }
+}
+
+canvas {
+    position: absolute;
+    top: 20vh;
+    left: 0;
+    width: 100vw;
+    height: 90vh;
+
+}
+
+#main {
+    display: flex;
+    width: 100vw;
+    height: 80vh;
+}
+#collisionCanvas{
+    opacity : 0;
+}
+
+.scores {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+#Score {
+    display: flex;
+    justify-content: left;
+    margin: 0.5rem;
+    padding: 0.5rem;
+    font-family: "Tilt Prism";
+    color: grey;
+    text-decoration: underline;
+    font-size: 6vh;
+}
+#MaxScore{
+    display: flex;
+    justify-content: left;
+    margin: 0.5rem;
+    padding: 0.5rem;
+    font-family: "Tilt Prism";
+    color: grey;
+    text-decoration: underline;
+    font-size: 6vh;
+
+}
