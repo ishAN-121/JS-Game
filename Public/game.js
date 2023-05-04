@@ -1,6 +1,6 @@
 //Declaring constants
 const canvas = document.getElementById("canvas1");
-const ctx = canvas.getContext('2d');
+const ctx = canvas.getContext('2d', { willReadFrequently: true });
 const destroySound = new Audio('Public/music/destroy.mp3');
 const gameOverSound = new Audio('Public/music/gameOver.mp3');
 const moveSound = new Audio('Public/music/move.mp3');
@@ -25,20 +25,20 @@ let rocks = [];
 //Creating a class for rocks and their animation
 class Rock {
     constructor() {
-        this.spritewidth = 70;
-        this.spriteheight = 70;
-        this.sizemodify = Math.random() * 1 + 2;
-        this.height = this.spritewidth * this.sizemodify;
-        this.width = this.spriteheight * this.sizemodify;
+        this.spritewidth = 271;
+        this.spriteheight = 194;
+        this.sizemodify = Math.random() * 0.2 + 0.6;
+        this.height = this.spritewidth;
+        this.width = this.spriteheight ;//* this.sizemodify;
         this.x = canvas.width;
         this.y = Math.random() * (canvas.height - 1.3 * this.height);
         this.velocityX = Math.random() * 1 + 2;
         this.velocityY = Math.random() * 1.5 - 2;
         this.fordeletion = false;
         this.image = new Image;
-        this.image.src = 'https://opengameart.org/sites/default/files/animated_asteroid.png';
+        this.image.src = 'https://www.frankslaboratory.co.uk/downloads/raven.png';
         this.frame = 0;
-        this.maxframe = 14;
+        this.maxframe = 4;
         this.lasttime = 0;
         this.randomColors = [Math.floor(Math.random() * 255), Math.floor(Math.random() * 255), Math.floor(Math.random() * 255)];
         this.color = 'rgb(' + this.randomColors[0] + ',' + this.randomColors[1] + ',' + this.randomColors[2] + ')';
@@ -62,7 +62,10 @@ class Rock {
     }
     draw() {
         collisionctx.fillStyle = this.color;
-        collisionctx.fillRect(this.x, this.y, this.width, this.height);
+        //collisionctx.fillRect(this.x, this.y, this.width, this.height);
+        collisionctx.beginPath();
+        collisionctx.arc(this.x+(this.width/2), this.y+(this.height/2), this.width/1.8, 0, 2 * Math.PI);
+        collisionctx.fill();
         ctx.drawImage(this.image, this.frame * this.spritewidth, 0, this.spritewidth, this.spriteheight, this.x, this.y, this.width, this.height);
     }
 }
@@ -130,20 +133,20 @@ window.addEventListener('click', function (e) {
 function GameOver() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     collisionctx.clearRect(0, 0, canvas.width, canvas.height);
-    ctx.fillStyle = 'white';
+    ctx.fillStyle = 'black';
     ctx.textalign = 'center';
 
     ctx.font = '30px Arial';
-    ctx.fillText('Game Over , your score is ' + score + '. Press any key to start again', 25 * vw, 30 * vh);
+    ctx.fillText('Game Over , your score is ' + score + '. Press any key to start again', canvas.width/4, canvas.height/3);
 }
 function GameStart() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     collisionctx.clearRect(0, 0, canvas.width, canvas.height);
-    ctx.fillStyle = 'white';
+    ctx.fillStyle = 'black';
     ctx.textalign = 'center';
 
     ctx.font = '30px Arial';
-    ctx.fillText('Press any key to start and click around meteors to destroy.', 22 * vw, 30 * vh);
+    ctx.fillText('Press any key to start and click on bird to destroy.', canvas.width/4, canvas.height/3);
     window.addEventListener('keydown', function (e) {
 
         if (!gameStart) {
@@ -161,7 +164,7 @@ function animation(time) {
     if ((time - lastpainttime) > 700) {
         rocks.push(new Rock);
         lastpainttime = time;
-        rocks.sort(function (a, b) { return a.width - b.width; });
+    //    rocks.sort(function (a, b) { return a.width - b.width; });
     }
     [...rocks, ...explosions].forEach(object => object.update(time));
     [...rocks, ...explosions].forEach(object => object.draw());

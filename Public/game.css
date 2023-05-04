@@ -11,8 +11,12 @@ html {
 body {
     font-family: "Tilt+Prism";
     font-size: 1.5rem;
-    background-image: url("https://w0.peakpx.com/wallpaper/241/159/HD-wallpaper-black-stars-black-aesthetic.jpg");
+    background-image: url("https://media.istockphoto.com/id/504735985/vector/duck-hunting-background.jpg?s=612x612&w=0&k=20&c=0boLXhLPv6lJn3I7LZeGgykn2pqgJvzzL1fN98awHb8=");
+    background-color: red;
     overflow: hidden;
+    background-repeat: no-repeat;
+    background-size: cover;
+
 
 }
 
@@ -31,7 +35,7 @@ body {
 
 @keyframes color {
     0% {
-        color: grey;
+        color: black;
     }
 
     50% {
@@ -72,7 +76,7 @@ canvas {
     margin: 0.5rem;
     padding: 0.5rem;
     font-family: "Tilt Prism";
-    color: grey;
+    color: black;
     text-decoration: underline;
     font-size: 6vh;
 }
@@ -82,7 +86,7 @@ canvas {
     margin: 0.5rem;
     padding: 0.5rem;
     font-family: "Tilt Prism";
-    color: grey;
+    color: black;
     text-decoration: underline;
     font-size: 6vh;
 
