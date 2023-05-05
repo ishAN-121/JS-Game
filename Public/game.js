@@ -64,7 +64,7 @@ class Rock {
         collisionctx.fillStyle = this.color;
         //collisionctx.fillRect(this.x, this.y, this.width, this.height);
         collisionctx.beginPath();
-        collisionctx.arc(this.x+(this.width/2), this.y+(this.height/2), this.width/1.8, 0, 2 * Math.PI);
+        collisionctx.arc(this.x+(this.width/2), this.y+(this.height/2), this.width/1.9, 0, 2 * Math.PI);
         collisionctx.fill();
         ctx.drawImage(this.image, this.frame * this.spritewidth, 0, this.spritewidth, this.spriteheight, this.x, this.y, this.width, this.height);
     }
