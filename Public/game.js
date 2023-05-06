@@ -18,6 +18,7 @@ let score = 0;
 let maxscore = localStorage.getItem("MaxScore");
 let gameOver = false;
 let gameStart = false;
+let increase = 0;
 
 //stores rocks present on the screen
 let rocks = [];
@@ -69,6 +70,12 @@ class Rock {
         ctx.drawImage(this.image, this.frame * this.spritewidth, 0, this.spritewidth, this.spriteheight, this.x, this.y, this.width, this.height);
     }
 }
+function updatespeed(){
+rocks.forEach(object =>{
+    object.velocityX +=1;
+
+
+});}
 let explosions = [];
 class Explosion {
     constructor(x, y, size) {
@@ -111,12 +118,17 @@ window.addEventListener('click', function (e) {
     moveSound.play();
     
     const detectpixel = collisionctx.getImageData(e.x, e.y, 1, 1);
-    console.log(detectpixel);
     const colordata = detectpixel.data;
     rocks.forEach(object => {
         if (object.randomColors[0] === colordata[0] && object.randomColors[1] === colordata[1] && object.randomColors[2] === colordata[2]) {
             object.fordeletion = true;
             score++;
+            increase++;
+            console.log(increase);
+            if(increase > 19){
+                updatespeed();
+                increase = 0;
+            }
             Score.innerHTML = "Score: " + score;
             explosions.push(new Explosion(object.x, object.y, object.width));
             if (score >= maxscoreval) {
@@ -130,6 +142,7 @@ window.addEventListener('click', function (e) {
     })
 
 });
+
 function GameOver() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     collisionctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -179,6 +192,7 @@ function animation(time) {
         gameOverSound.play();
         GameOver();
         score = 0;
+        increase = 0;
         rocks = [];
 
         window.addEventListener('keydown', function (e) {
