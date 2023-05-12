@@ -20,11 +20,11 @@ let gameOver = false;
 let gameStart = false;
 let increase = 0;
 
-//stores rocks present on the screen
-let rocks = [];
+//stores birds present on the screen
+let birds = [];
 
-//Creating a class for rocks and their animation
-class Rock {
+//Creating a class for birds and their animation
+class Bird {
     constructor() {
         this.spritewidth = 271;
         this.spriteheight = 194;
@@ -50,7 +50,6 @@ class Rock {
         this.x -= this.velocityX;
         this.y += this.velocityY;
         if (this.x < 0 - this.width) this.fordeletion = true;
-
         if (time - this.lasttime > 100) {
             if (this.frame > this.maxframe) this.frame = 0;
             else this.frame++;
@@ -70,8 +69,10 @@ class Rock {
     }
 }
 function updatespeed() {
-    rocks.forEach(object => {
+    birds.forEach(object => {
         object.velocityX += 1;
+
+
     });
 }
 let explosions = [];
@@ -116,7 +117,7 @@ window.addEventListener('click', function (e) {
     moveSound.play();
     const detectpixel = collisionctx.getImageData(e.x, e.y, 1, 1);
     const colordata = detectpixel.data;
-    rocks.forEach(object => {
+    birds.forEach(object => {
         if (object.randomColors[0] === colordata[0] && object.randomColors[1] === colordata[1] && object.randomColors[2] === colordata[2]) {
             object.fordeletion = true;
             score++;
@@ -143,7 +144,6 @@ function GameOver() {
     collisionctx.clearRect(0, 0, canvas.width, canvas.height);
     ctx.fillStyle = 'black';
     ctx.textalign = 'center';
-
     ctx.font = '30px Arial';
     ctx.fillText('Game Over , your score is ' + score + '. Press any key to start again', canvas.width / 4, canvas.height / 3);
 }
@@ -152,7 +152,6 @@ function GameStart() {
     collisionctx.clearRect(0, 0, canvas.width, canvas.height);
     ctx.fillStyle = 'black';
     ctx.textalign = 'center';
-
     ctx.font = '30px Arial';
     ctx.fillText('Press any key to start and click on bird to destroy.', canvas.width / 4, canvas.height / 3);
     window.addEventListener('keydown', function (e) {
@@ -162,7 +161,6 @@ function GameStart() {
             musicSound.play();
             animation();
         }
-
     })
 }
 
@@ -170,13 +168,13 @@ function animation(time) {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     collisionctx.clearRect(0, 0, canvas.width, canvas.height);
     if ((time - lastpainttime) > 700) {
-        rocks.push(new Rock);
+        birds.push(new Bird);
         lastpainttime = time;
-        //    rocks.sort(function (a, b) { return a.width - b.width; });
+
     }
-    [...rocks, ...explosions].forEach(object => object.update(time));
-    [...rocks, ...explosions].forEach(object => object.draw());
-    rocks = rocks.filter(object => !object.fordeletion);
+    [...birds, ...explosions].forEach(object => object.update(time));
+    [...birds, ...explosions].forEach(object => object.draw());
+    birds = birds.filter(object => !object.fordeletion);
     explosions = explosions.filter(object => !object.fordeletion);
 
     if (!gameOver) {
@@ -188,7 +186,7 @@ function animation(time) {
         GameOver();
         score = 0;
         increase = 0;
-        rocks = [];
+        birds = [];
 
         window.addEventListener('keydown', function (e) {
             musicSound.play();

@@ -16,8 +16,6 @@ body {
     overflow: hidden;
     background-repeat: no-repeat;
     background-size: cover;
-
-
 }
 
 #Game {
@@ -53,7 +51,6 @@ canvas {
     left: 0;
     width: 100vw;
     height: 90vh;
-
 }
 
 #main {
@@ -61,8 +58,9 @@ canvas {
     width: 100vw;
     height: 80vh;
 }
-#collisionCanvas{
-    opacity : 0;
+
+#collisionCanvas {
+    opacity: 0;
 }
 
 .scores {
@@ -80,7 +78,8 @@ canvas {
     text-decoration: underline;
     font-size: 6vh;
 }
-#MaxScore{
+
+#MaxScore {
     display: flex;
     justify-content: left;
     margin: 0.5rem;
